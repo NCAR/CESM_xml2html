@@ -71,7 +71,9 @@ def _main_func(options, work_dir):
             continue
         compset_file = files.get_value("COMPSETS_SPEC_FILE", attribute={"component":comp})
         if compset_file not in compset_files:
-            expect(os.path.isfile(compset_file), "Could not find file {}".format(compset_file))
+            if not os.path.isfile(compset_file):
+                logger.warning("Could not find file {}".format(compset_file))
+                continue
             compset_files.append(compset_file)
             compset = Compsets(infile=compset_file, files=files)
             longnames = compset.get_compset_longnames()
@@ -108,9 +110,10 @@ def _main_func(options, work_dir):
                     comp_class = comp_classes[i]
                     comp_config_file = files.get_value("CONFIG_{}_FILE".format(comp_class), {"component":components[i]})
                     compobj = Component(comp_config_file, comp_class)
-                    compset_dict[longname].update({"{}_desc".format(comp_class):compobj.get_description(longname)})
-
-
+                    try:
+                        compset_dict[longname].update({"{}_desc".format(comp_class):compobj.get_description(longname)})
+                    except:
+                        print("Compset {} in file {} ill defined".format(longname, comp_config_file))
 ##    print ("compset_dict = {}".format(compset_dict))
 
     # load up jinja template
