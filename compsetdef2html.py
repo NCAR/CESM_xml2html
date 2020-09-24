@@ -58,14 +58,17 @@ def _main_func(options, work_dir):
 
     files = Files()
     model_version = options.version[0]
-    
+
     comp_classes = ("CPL", "ATM", "LND", "ICE", "OCN", "ROF", "GLC", "WAV", "ESP")
     components = ["allactive"]
     for comp in comp_classes:
         components.extend(files.get_components("COMP_ROOT_DIR_{}".format(comp)))
+
     compset_files = []
     compset_dict = {}
     for comp in components:
+        if not comp:
+            continue
         compset_file = files.get_value("COMPSETS_SPEC_FILE", attribute={"component":comp})
         if compset_file not in compset_files:
             expect(os.path.isfile(compset_file), "Could not find file {}".format(compset_file))
@@ -107,7 +110,7 @@ def _main_func(options, work_dir):
                     compobj = Component(comp_config_file, comp_class)
                     compset_dict[longname].update({"{}_desc".format(comp_class):compobj.get_description(longname)})
 
-                        
+
 ##    print ("compset_dict = {}".format(compset_dict))
 
     # load up jinja template
@@ -120,7 +123,7 @@ def _main_func(options, work_dir):
     templateVars = { 'compset_dict'  : compset_dict,
                      'today'         : _now,
                      'model_version' : model_version }
-        
+
     # render the template
     comp_tmpl = template.render( templateVars )
 
