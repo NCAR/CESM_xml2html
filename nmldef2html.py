@@ -219,19 +219,25 @@ def _main_func(options, work_dir):
                                         derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['autotroph_cnt']
                                         derived_default_value[marbl_varname] = []
                                         for key in ['((autotroph_sname)) == "sp"', '((autotroph_sname)) == "diat"', '((autotroph_sname)) == "diaz"']:
-                                            if key in MARBL_json_var["default_value"].keys():
-                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                            if isinstance(MARBL_json_var["default_value"], dict):
+                                                if key in MARBL_json_var["default_value"].keys():
+                                                    derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                                else:
+                                                    derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
                                             else:
-                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"])
 ##                                    elif root_varname == "zooplankton":
                                     elif "zooplankton" in root_varname:
                                         derived_entry_root[marbl_varname] = "dtype(%d)" % MARBL_default_settings.settings_dict['zooplankton_cnt']
                                         derived_default_value[marbl_varname] = []
                                         for key in ['((zooplankton_sname)) == "zoo"']:
-                                            if key in MARBL_json_var["default_value"].keys():
-                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                            if isinstance(MARBL_json_var["default_value"], dict):
+                                                if key in MARBL_json_var["default_value"].keys():
+                                                    derived_default_value[marbl_varname].append(MARBL_json_var["default_value"][key])
+                                                else:
+                                                    derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
                                             else:
-                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"]["default"])
+                                                derived_default_value[marbl_varname].append(MARBL_json_var["default_value"])
 ##                                    elif root_varname == "grazing":
                                     elif "grazing" in root_varname:
                                         derived_entry_root[marbl_varname] = "dtype(%d,%d)" % \
