@@ -1,189 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  <LINK REL="SHORTCUT ICON"
-        HREF="http://www.cesm.ucar.edu/styles/modern/img/favicon.png">
-  <head>
-    <meta charset="utf-8">
-    <title>CESM2 Series Public Release</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-
+<head>
     <!-- css -->
-    <!--#include virtual="/styles/modern/css/css-include.html" -->
-    
-    <!-- Theme skin -->
-    <link href="/styles/modern/skins/default.css" rel="stylesheet" />
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
-    <![endif]-->
-    
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css" />
+    <!--#include virtual="/styles/unity/css/css-include.html" -->
 
-    <style type="text/css">
-        #description { background-color: #c5edcb; }
-	#wrapit  { word-wrap: break-word;
-                   white-space: normal; }
-    </style>
+    <!-- bring in datatables css -->
+    <link rel="stylesheet" href="/styles/unity/css/datatables.min.css">
+
+    <!-- head items -->
+    <title>{{cesm_version}} {{ comp }}{{ compversion }} Namelist Definitions</title>
+    <meta name="description" content="" />
+</head>
 
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<body class="ncar">
+    <!-- navbar include -->
+    <!--#include virtual="/styles/unity/includes/header/header.html" -->
 
-    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+    <main class="container-lg py-2 pt-md-3">
+        <div class="d-grid d-print-flex">
+            <nav aria-label="breadcrumb" class="breadcrumb-wrapper mb-2 d-print-none">
+                <ol class="breadcrumb">
+                    <!-- breadcrumb links start -->
+                    <li class="breadcrumb-item"><a href="https://www.cesm.ucar.edu">CESM Home</a></li>
+                    <li class="breadcrumb-item"><a href="https://docs.cesm.ucar.edu">CESM Documentation &amp; Tools</a></li>
+                    <li class="breadcrumb-item"><a href="/models/cesm2/settings/current">CESM2 Component Configuration Settings</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{cesm_version}} {{ comp }}{{ compversion }} Namelist Definitions</li>
+                    <!-- breadcrumb links end -->
+                </ol>
+            </nav>
 
+            <article class="main-content-wrapper">
+                <h1>{{cesm_version}} {{ comp }}{{ compversion }} Namelist Definitions</h1>
+
+                <div class="main-content clearfix">
+                    <div class="component dataset p-3 yellow-orange-border mb-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 col-md-4 dataset-label">Model Version:</div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-primary">2.2.0</span></div>
+                                </div>
+
+                                <div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 col-md-4 dataset-label">Component Tag:</div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-success">{{ comptag }}</span></div>
+                                </div>
+
+                                <div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 col-md-4 dataset-label">HTML Created:</div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-secondary">{{ _now }}</span></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuCESM" data-toggle="dropdown" aria-expanded="false">
+                                        Change CESM Version&nbsp;
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuCESM">
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.2.0">CESM2.2.0</a></li>
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.3">CESM2.1.3</a></li>
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.2">CESM2.1.2</a></li>
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.1">CESM2.1.1</a></li>
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.0">CESM2.1.0</a></li>
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.0.1">CESM2.0.1</a></li>
+                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.0.0">CESM2.0.0</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- table buttons -->
+                    <div class="text-center" style="">
+                        <button type="button" class="btn btn-primary" id="btn-show-all-children">
+                            <i class="fa fa-folder-open"></i> Show All
+                        </button>
+
+                        <button type="button" class="btn btn-primary" id="btn-hide-all-children">
+                            <i class="fa fa-folder"></i> Hide All
+                        </button>
+                    </div>
+
+                    <!-- main content area -->
+                    <table id="nmlTable" class="table-striped bg-white" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Namelist Group</th>
+                                <th>Category</th>
+                                <th>Entry Type</th>
+                                <th class="none">Valid Values</th>
+                                <th class="none">Possible Default Values</th>
+                                <th class="none">Description and out-of-the-box Default</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for category, var_list in html_dict|dictsort %}
+                            {% for var in var_list|sort(attribute='name') %}
+                            <tr>
+                                <td>{{ var['name']|replace("___","&"|e) }}</td>
+                                <td>{{ var['group_name'] }}</td>
+                                <td>{{ category|replace("___","&"|e) }}</td>
+                                <td>{{ var['entry_type'] }}</td>
+                                <td>{{ var['valid_values'] }}</td>
+                                <td>{{ var['default_values'] }}</td>
+                                <td><pre id="description-dt">{{ var['desc'] }}</pre></td>
+                            </tr>
+                            {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Variable</th>
+                                <th>Namelist Group</th>
+                                <th>Category</th>
+                                <th>Entry Type</th>
+                                <th class="none">Valid Values</th>
+                                <th class="none">Possible Default Values</th>
+                                <th class="none">Description and out-of-the-box Default</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- footer & javascript includes -->
+    <!--#include virtual="/styles/unity/includes/footer/footer.html" -->
+    <!--#include virtual="/styles/unity/js/js-include.html" -->
+
+
+    <!-- datatables js -->
+    <script src="/styles/unity/js/jquery.min.js"></script>
+    <script src="/styles/unity/js/datatables.min.js"></script>
     <script>
     $(document).ready( function () {
-	var table = $('#nmlTable').DataTable( {
-	    "responsive": true,
-	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]	    
-	} );
+        var table = $('#nmlTable').DataTable({
+            "responsive": true,
+            "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ]     
+        } );
 
-	// Handle click on "Expand All" button
-	$('#btn-show-all-children').on('click', function(){
-	    // Expand row details
+        // Handle click on "Expand All" button
+        $('#btn-show-all-children').on('click', function(){
+            // Expand row details
             table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
-	});
-	
-	// Handle click on "Collapse All" button
-	$('#btn-hide-all-children').on('click', function(){
+        });
+
+        // Handle click on "Collapse All" button
+        $('#btn-hide-all-children').on('click', function(){
             // Collapse row details
             table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
-	});
-    } );
+        });
+    });
     </script>
-    
-  </head>
-  <body>
-    <div id="wrapper">
-      <header>
-	
-        <div class="navbar navbar-default navbar-static-top">
-          <div class="container">
-            
-            <!-- navbar header -->
-            <!--#include virtual="/styles/modern/includes/header/navbar-header.html" -->
-            <!-- end navbar header -->
-            
-            <!-- search -->
-            <!--#include virtual="/styles/modern/includes/header/search.html" -->
-            <!-- end search -->
-            
-            <!-- main navigation -->
-            <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
-            <!-- end main navigation -->
-            
-          </div>
-        </div>
-      </header>
-      <!-- end header -->
-      
-      <section id="inner-headline">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-12">
-              <ul class="breadcrumb">
-               <li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/cesm2.0">CESM2 Series Public Release</a><i class="icon-angle-right"></i></li>
-                <li><a href="/models/cesm2.0/component_settings/index.html">CESM2 Component Configuration Settings</a><i class="icon-angle-right"></i></li>
-                <li class="active">{{ comp }}{{ compversion }} Fortran Namelist Definitions</li>
-	      </ul>
-	    </div>
-	  </div>
-	</div>
-      </section>
-
-      <section id="content">
-	<div class="container">
-	  <div class="row">
-	    <div class="post-image">
-	      <div class="post-heading">
-		<h2>{{ comp }}{{ compversion }} Fortran Namelist Definitions</h2>
-	      </div>
-	    </div>
-              
-            <!--  ---------------------------------------------------------------------  -->
-            <h4 class="separator"> Component tag: {{ comptag }}</h4>
-	    <h5>HTML created on: {{ today }}</h5>
-            <!--  ---------------------------------------------------------------------  -->
-
-            <button id="btn-show-all-children" type="button">Expand All</button>
-            <button id="btn-hide-all-children" type="button">Collapse All</button>
-            <hr/>
-            <table id="nmlTable" class="display wrap">
-	      <thead>
-		<tr>
-		  <th>Variable</th>
-		  <th>Namelist Group</th>
-		  <th>Category</th>
-		  <th>Entry Type</th>
-		  <th class="none">Valid Values</th>
-		  <th class="none">Possible Default Values</th>
-		  <th class="none">Description and out-of-the-box Default</th>
-		</tr>
-	      </thead>
-	      <tbody>
-		{% for category, var_list in html_dict|dictsort %}
-		{% for var in var_list|sort(attribute='name') %}
-		<tr>
-		  <td>{{ var['name']|replace("___","&"|e) }}</td>
-		  <td>{{ var['group_name'] }}</td>
-		  <td>{{ category|replace("___","&"|e) }}</td>
-		  <td>{{ var['entry_type'] }}</td>
-		  <td>{{ var['valid_values'] }}</td>
-		  <td>{{ var['default_values'] }}</td>
-		  <td><pre id="description">{{ var['desc'] }}</pre></td>
-		</tr>
-		{% endfor %}
-		{% endfor %}
-              </tbody>
-              <tfoot>
-		<tr>
-		  <th>Variable</th>
-		  <th>Namelist Group</th>
-		  <th>Category</th>
-		  <th>Entry Type</th>
-		  <th class="none">Valid Values</th>
-		  <th class="none">Possible Default Values</th>
-		  <th class="none">Description and out-of-the-box Default</th>
-		</tr>
-	      </tfoot>
-	    </table>
-	  </div>
-	</div>
-      </section>
-
-      <footer>
-	<div class="container">
-          <!-- footer -->
-          <!--#include virtual="/styles/modern/includes/footer/footer.html" -->
-          <!-- end footer -->
-	</div>
-        <div id="sub-footer">
-          <!-- navbar subfooter -->
-          <!--#include virtual="/styles/modern/includes/footer/subfooter.html" -->
-          <!-- end subfooter -->
-        </div>
-        <div class="col-lg-6">
-          <!-- Social Media Include -->
-          <!--#include virtual="/styles/modern/includes/footer/social-media-inc.html" -->
-          <!-- end Social Media Include -->
-        </div>
-      </footer>
-
-    </div>
-    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-    <script>
-      // Check if the nsf badge is there
-      if ( !($(".nsf-header")[0]) ) {
-	// create the nsf badge div
-	var div = '<div class="nsf-header"> <a href="http://www.nsf.gov/"> <img src="/styles/modern/includes/header/ncar_header_nsf_only.png"title="Sponsored by NSF"alt="Sponsored by NSF"> </a> </div>';
-
-	// insert it
-	$('.search-container').after(div);
-      }
-    </script>
-  </body>
+</body>
 </html>
