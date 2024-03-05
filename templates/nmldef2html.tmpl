@@ -53,26 +53,14 @@
                                 </div>
                             </div>
                             <div class="col-md-6 text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuCESM" data-toggle="dropdown" aria-expanded="false">
-                                        Change CESM Version&nbsp;
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuCESM">
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.2.0">CESM2.2.0</a></li>
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.3">CESM2.1.3</a></li>
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.2">CESM2.1.2</a></li>
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.1">CESM2.1.1</a></li>
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.0">CESM2.1.0</a></li>
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.0.1">CESM2.0.1</a></li>
-                                        <li><a class="dropdown-item" href="/models/cesm2/settings/2.0.0">CESM2.0.0</a></li>
-                                    </ul>
-                                </div>
+                                <!-- model version include -->
+                                <!--#include virtual="/models/cesm2/settings/includes/cesm-versions.html" -->
                             </div>
                         </div>
                     </div>
 
                     <!-- table buttons -->
-                    <div class="text-center" style="">
+                    <div class="text-center">
                         <button type="button" class="btn btn-primary" id="btn-show-all-children">
                             <i class="fa fa-folder-open"></i> Show All
                         </button>
@@ -83,7 +71,7 @@
                     </div>
 
                     <!-- main content area -->
-                    <table id="nmlTable" class="table-striped bg-white" style="width:100%;">
+                    <table id="nmlTable" class="table-striped bg-white w-100">
                         <thead>
                             <tr>
                                 <th>Variable</th>
