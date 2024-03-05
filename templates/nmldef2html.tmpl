@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/styles/unity/css/datatables.min.css">
 
     <!-- head items -->
-    <title>{{cesm_version}} {{ comp }}{{ compversion }} Namelist Definitions</title>
+    <title>CESM{{cesmmodel}} {{ comp }}{{ compversion }} Namelist Definitions</title>
     <meta name="description" content="" />
 </head>
 
@@ -39,23 +39,7 @@
                             <div class="col-md-6">
                                 <div class="row gx-0 mb-2 mb-md-1">
                                     <div class="col-12 col-md-4 dataset-label">Model Version:</div>
-                                    <div class="col-12 col-md-8">
-                                        <span class="badge bg-primary">{{ cesmmodel }}</span>
-                                        <div class="dropdown">
-                                            <span class="badge bg-primary dropdown-toggle" role="button" id="dropdownMenuCESM2" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Change CESM Version&nbsp;
-                                            </span>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuCESM2">
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.2.0">CESM2.2.0</a></li>
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.3">CESM2.1.3</a></li>
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.2">CESM2.1.2</a></li>
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.1">CESM2.1.1</a></li>
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.1.0">CESM2.1.0</a></li>
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.0.1">CESM2.0.1</a></li>
-                                                <li><a class="dropdown-item" href="/models/cesm2/settings/2.0.0">CESM2.0.0</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-primary">{{ cesmmodel }}</span></div>
                                 </div>
 
                                 <div class="row gx-0 mb-2 mb-md-1">
@@ -69,6 +53,9 @@
                                 </div>
                             </div>
                             <div class="col-md-6 text-center">
+                                <div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 dataset-label">HTML Created: <span class="badge bg-secondary">2024-03-05</span></div>
+                                </div>
                                 <!-- model version include -->
                                 <!--#include virtual="/models/cesm2/settings/includes/cesm-versions-settings.html" -->
                             </div>
