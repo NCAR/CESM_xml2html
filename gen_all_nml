@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export CIMEROOT=/home/aliceb/cesm/cime
-CESMROOT=/home/aliceb/cesm
+export CIMEROOT=/home/aliceb/CESM/cime
+CESMROOT=/home/aliceb/CESM
 OUTROOT=/home/ryanj/scripts/CESM_xml2html/toss
 
 # CAM
