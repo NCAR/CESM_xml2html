@@ -2,7 +2,7 @@
 
 export CIMEROOT=/home/aliceb/cesm/cime
 CESMROOT=/home/aliceb/cesm
-OUTROOT=/home/aliceb/CESM_xml2html/toss
+OUTROOT=/home/ryanj/scripts/CESM_xml2html/toss
 
 # CAM
 echo "CAM"
