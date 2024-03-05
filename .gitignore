@@ -7,4 +7,5 @@
 # ignore toss dirs
 toss*
 
-
+# dont need mac files
+.DS_Store

@@ -89,6 +89,9 @@ def commandline_options():
     parser.add_argument('--compversion', nargs=1, required=False,
                         help='Component version. Example: 4.0, 4.5, 5.0, etc...')
 
+    parser.add_argument('--cesmmodel', nargs=1, required=False,
+                        help='CESM model version. Example: 2.2.0, 2.1.3, 2.1.2, etc...')
+
     parser.add_argument('--marbl-json', required=False, action='store_true', dest='JSON',
                         help='Flag to look for MARBL JSON file instead of XML')
 
@@ -167,6 +170,11 @@ def _main_func(options, work_dir):
     compversion = ''
     if options.compversion:
         compversion = options.compversion[0]
+
+    # get the cesm model version from the command line args
+    cesmmodel = ''
+    if options.cesmmodel:
+        cesmmodel = options.cesmmodel[0]
 
     # Create a dictionary with a category key and a list of all entry nodes for each key
     category_dict = dict()
@@ -449,6 +457,7 @@ def _main_func(options, work_dir):
     templateVars = { 'html_dict'    : html_dict,
                      'today'        : _now,
                      'cesm_version' : cesm_version,
+                     'cesmmodel'    : cesmmodel,
                      'comp'         : comp,
                      'comptag'      : comptag,
                      'compversion'  : compversion,
