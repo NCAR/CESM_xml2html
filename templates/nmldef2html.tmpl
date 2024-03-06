@@ -38,18 +38,20 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row gx-0 mb-2 mb-md-1">
-                                    <div class="col-12 col-md-4 dataset-label">Model Version:</div>
-                                    <div class="col-12 col-md-8"><span class="badge bg-primary">{{ cesmmodel }}</span></div>
-                                </div>
-
-                                <div class="row gx-0 mb-2 mb-md-0">
                                     <div class="col-12 col-md-4 dataset-label">Component Tag:</div>
                                     <div class="col-12 col-md-8"><span class="badge bg-success">{{ comptag }}</span></div>
                                 </div>
+
+                                <div class="row gx-0 mb-2 mb-md-0">
+                                    <div class="col-12 col-md-4 dataset-label">HTML Created:</div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-primary">{{ today }}</span></div>
+                                </div>
+
                             </div>
                             <div class="col-md-6 text-center">
                                 <div class="row gx-0 mb-2 mb-md-1">
-                                    <div class="col-12 dataset-label">HTML Created: <span class="badge bg-secondary">{{ today }}</span></div>
+                                    <div class="col-12 dataset-label">Model Version: <span class="badge bg-secondary">{{ cesmmodel }}</span></div>
+
                                 </div>
                                 <!-- model version include -->
                                 <!--#include virtual="/models/cesm2/settings/includes/cesm-versions-settings.html" -->

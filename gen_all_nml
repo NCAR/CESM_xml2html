@@ -27,6 +27,7 @@ echo "SKIPPING CLM5"
 echo "CLM4"
 ./nmldef2html.py --cesmmodel 2.0.0 --nmlfile $CESMROOT/components/clm/bld/namelist_files/namelist_definition_clm4_0.xml --comp CLM --htmlfile $OUTROOT/clm4_0_nml.html --comptag clm4.0.81
 # CLM4.5 UPDATED
+# Error: unable to parse file namelist_definition_clm4_5.xml
 echo "CLM4.5"
 ./nmldef2html.py --cesmmodel 2.0.0 --nmlfile $CESMROOT/components/clm/bld/namelist_files/namelist_definition_clm4_5.xml --comp CLM --htmlfile $OUTROOT/clm4_5_nml.html --comptag release-clm5.0.0
 
