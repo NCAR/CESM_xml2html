@@ -12,7 +12,6 @@
     <meta name="description" content="" />
 </head>
 
-
 <body class="ncar">
     <!-- navbar include -->
     <!--#include virtual="/styles/unity/includes/header/header.html" -->
@@ -25,7 +24,7 @@
                     <li class="breadcrumb-item"><a href="https://www.cesm.ucar.edu">CESM Home</a></li>
                     <li class="breadcrumb-item"><a href="https://docs.cesm.ucar.edu">CESM Documentation &amp; Tools</a></li>
                     <li class="breadcrumb-item"><a href="/models/cesm2/settings/current">CESM2 Component Configuration Settings</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{cesm_version}} {{ comp }}{{ compversion }} Namelist Definitions</li>
+                    <li class="breadcrumb-item active" aria-current="page">CESM{{cesmmodel}} {{ comp }}{{ compversion }} Namelist Definitions</li>
                     <!-- breadcrumb links end -->
                 </ol>
             </nav>
@@ -38,23 +37,22 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 dataset-label">Model Version: <span class="badge bg-secondary">{{cesmmodel}}</span></div>
+                                </div>
+                                <!-- model version include -->
+                                <!--#include virtual="/models/cesm2/settings/includes/cesm-versions-settings.html" -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row gx-0 mb-2 mb-md-1">
                                     <div class="col-12 col-md-4 dataset-label">Component Tag:</div>
                                     <div class="col-12 col-md-8"><span class="badge bg-success">{{ comptag }}</span></div>
                                 </div>
 
                                 <div class="row gx-0 mb-2 mb-md-0">
                                     <div class="col-12 col-md-4 dataset-label">HTML Created:</div>
-                                    <div class="col-12 col-md-8"><span class="badge bg-primary">{{ today }}</span></div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-dark">{{ today }}</span></div>
                                 </div>
-
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <div class="row gx-0 mb-2 mb-md-1">
-                                    <div class="col-12 dataset-label">Model Version: <span class="badge bg-secondary">{{ cesmmodel }}</span></div>
-
-                                </div>
-                                <!-- model version include -->
-                                <!--#include virtual="/models/cesm2/settings/includes/cesm-versions-settings.html" -->
                             </div>
                         </div>
                     </div>

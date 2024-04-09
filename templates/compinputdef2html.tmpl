@@ -24,7 +24,7 @@
                     <li class="breadcrumb-item"><a href="https://www.cesm.ucar.edu">CESM Home</a></li>
                     <li class="breadcrumb-item"><a href="https://docs.cesm.ucar.edu">CESM Documentation &amp; Tools</a></li>
                     <li class="breadcrumb-item"><a href="/models/cesm2/settings/current">CESM2 Component Configuration Settings</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{cesm_version}} {{ comp }}{{ compversion }} Variable Definitions</li>
+                    <li class="breadcrumb-item active" aria-current="page">CESM{{cesmmodel}} {{ comp }}{{ compversion }} CASEROOT Variable Definitions</li>
                     <!-- breadcrumb links end -->
                 </ol>
             </nav>
@@ -37,27 +37,27 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 dataset-label">Model Version: <span class="badge bg-secondary">{{cesmmodel}}</span></div>
+                                </div>
+                                <!-- model version include -->
+                                <!--#include virtual="/models/cesm2/settings/includes/cesm-versions-settings.html" -->
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="row gx-0 mb-2 mb-md-1">
                                     <div class="col-12 col-md-4 dataset-label">Component Tag:</div>
                                     <div class="col-12 col-md-8"><span class="badge bg-success">{{ comptag }}</span></div>
                                 </div>
 
                                 <div class="row gx-0 mb-2 mb-md-0">
                                     <div class="col-12 col-md-4 dataset-label">HTML Created:</div>
-                                    <div class="col-12 col-md-8"><span class="badge bg-primary">{{ today }}</span></div>
+                                    <div class="col-12 col-md-8"><span class="badge bg-dark">{{ today }}</span></div>
                                 </div>
-
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <div class="row gx-0 mb-2 mb-md-1">
-                                    <div class="col-12 dataset-label">Model Version: <span class="badge bg-secondary">{{ cesmmodel }}</span></div>
-                                </div>
-                                <!-- model version include -->
-                                <!--#include virtual="/models/cesm2/settings/includes/cesm-versions-settings.html" -->
                             </div>
                         </div>
 
-                        <div class="row">
-                            <p>Use CASEROOT tools <a href="https://esmci.github.io/cime/Tools_user/xmlquery.html">xmlquery</a> to query these variables and <a href="https://esmci.github.io/cime/Tools_user/xmlchange.html">xmlchange</a> to change their values. </p> 
+                        <div class="row mt-3 small">
+                            <p class="mb-0">Use CASEROOT tools <a href="https://esmci.github.io/cime/Tools_user/xmlquery.html">xmlquery</a> to query these variables and <a href="https://esmci.github.io/cime/Tools_user/xmlchange.html">xmlchange</a> to change their values. </p> 
                         </div>
                     </div>
 
@@ -73,7 +73,7 @@
                     </div>
 
                     <!-- main content area -->
-                    <table id="compTable" class="display wrap">
+                    <table id="compTable" class="table-striped bg-white w-100">
                         <thead>
                             <tr>
                                 <th>Parameter Name</th>
@@ -94,7 +94,7 @@
                                 <td>{{ var_dict['group'] }}</td>
                                 <td>{{ var_dict['filename'] }}</td>
                                 <td>{{ var_dict['valid_values'] }}</td>
-                                <td><pre id="description">{{ var_dict['desc'] }}</pre></td>
+                                <td><pre id="description-dt">{{ var_dict['desc'] }}</pre></td>
                             </tr>
                             {% endfor %}
                         </tbody>
