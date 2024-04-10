@@ -1,204 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>CESM2 Machine Definition</title>
-    <link rel="shortcut icon" href="/styles/modern/img/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-
+<head>
     <!-- css -->
-    <!--#include virtual="/styles/modern/css/css-include.html" -->
-    
-    <!-- Theme skin -->
-    <link href="/styles/modern/skins/default.css" rel="stylesheet" />
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" type="text/css" href="/media/css/ie.css" />
-    <![endif]-->
-    
-    <link rel="stylesheet" href="/styles/modern/css/datatables.min.css" />
+    <!--#include virtual="/styles/unity/css/css-include.html" -->
 
-    <style type="text/css">
-        #details { background-color: #c5edcb; }
-    </style>
-  </head>
+    <!-- bring in datatables css -->
+    <link rel="stylesheet" href="/styles/unity/css/datatables.min.css">
 
-  <body>
-    <div id="wrapper">
-      <header>
-	
-        <div class="navbar navbar-default navbar-static-top">
-          <div class="container">
-            
-            <!-- navbar header -->
-            <!--#include virtual="/styles/modern/includes/header/navbar-header.html" -->
-            <!-- end navbar header -->
-            
-            <!-- search -->
-            <!--#include virtual="/styles/modern/includes/header/search.html" -->
-            <!-- end search -->
-
-            <!-- NSF header -->
-	    <!--#include virtual="/styles/modern/includes/header/nsf-header.html" -->
-	    <!-- end NSF header -->
-            
-            <!-- main navigation -->
-            <!--#include virtual="/styles/modern/includes/navigation/models-nav.html" -->
-            <!-- end main navigation -->
-            
-          </div>
-        </div>
-      </header>
-      <!-- end header -->
-
-      <section id="inner-headline">
-	<div class="container">
-	  <div class="row">
-	    <div class="col-lg-12">
-	      <ul class="breadcrumb">
-		<li><a href="/index.html"><i class="fa fa-home"></i></a><i class="icon-angle-right"></i></li>
-		<li><a href="/models/">CESM Models</a><i class="icon-angle-right"></i></li>
-		<li><a href="/models/current.html">CESM Supported Releases</a><i class="icon-angle-right"></i></li>
-		<li><a href="/models/cesm2">CESM2</a><i class="icon-angle-right"></i></li>
-		<li class="active">Machine Definitions</li>
-	      </ul>
-	    </div>
-	  </div>
-	</div>
-      </section>
+    <!-- head items -->
+    <title>CESM{{cesmmodel}} Machine Definitions</title>
+    <meta name="description" content="Machine definitions for CESM{{cesmmodel}}" />
+</head>
 
 
-      <section id="content">
-	<div class="container">
-	  <div class="row clear-marginbot">
-	    <div class="col-lg-12">
-	      <div class="post-image">
-		<div class="dropdown pull-right">
-		  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    CESM2 Version <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-		    <li><a class="" href="/models/cesm2/config/2.1.0/machines.html">CESM2.1.0</a></li>
-		    <li><a class="" href="/models/cesm2/config/2.0.1/machines.html">CESM2.0.1</a></li>
-		    <li><a class="" href="/models/cesm2/config/2.0.0/machines.html">CESM2.0.0</a></li>
-		  </ul>
+<body class="ncar">
+    <!-- navbar include -->
+    <!--#include virtual="/styles/unity/includes/header/header.html" -->
+
+    <main class="container-lg py-2 pt-md-3">
+        <div class="d-grid d-print-flex">
+            <nav aria-label="breadcrumb" class="breadcrumb-wrapper mb-2 d-print-none">
+                <ol class="breadcrumb">
+                    <!-- breadcrumb links start -->
+                    <li class="breadcrumb-item"><a href="https://www.cesm.ucar.edu">CESM Home</a></li>
+                    <li class="breadcrumb-item"><a href="https://docs.cesm.ucar.edu">CESM Documentation &amp; Tools</a></li>
+                    <li class="breadcrumb-item"><a href="/models/cesm2/config">CESM2 Component Configuration Settings</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">CESM{{cesmmodel}} Machine Definitions</li>
+                    <!-- breadcrumb links end -->
+                </ol>
+            </nav>
+
+
+            <article class="main-content-wrapper">
+                <h1>CESM{{cesmmodel}} Machine Definitions</h1>
+
+                <div class="main-content clearfix">
+                	<div class="component dataset p-3 yellow-orange-border mb-3">
+                		<div class="row">
+                			<div class="col-md-6">
+                				<div class="row gx-0 mb-2 mb-md-1">
+                                    <div class="col-12 dataset-label">Model Version: <span class="badge bg-secondary">{{cesmmodel}}</span></div>
+                                </div>
+
+                                <!-- model version include -->
+                                <!--#include virtual="/models/cesm2/config/includes/cesm-versions-machines.html" -->
+							</div>
+							<div class="col-md-6">
+								 <div class="row gx-0 mb-2 mb-md-1">
+							        <div class="col-12 col-md-4 dataset-label">HTML Created:</div>
+							        <div class="col-12 col-md-8"><span class="badge bg-dark">{{ today }}</span></div>
+							    </div>
+							</div>
+						</div>
+
+						<div class="row mt-3">
+							<div class="col-md-6">
+								<h4 class="">Support Levels</h4>
+					            <p class="mb-0"><strong>Tested</strong> - Indicates that the machine has passed funtional CESM regression testing but may not necessarily by appropriate for large coupled experiments due to machine restrictions; for example, limited number of nodes and disk space.</p>
+					            <p class="mb-0"><strong>Scientific</strong> - Indicates that the machine has passed statistical validation and CESM regression testing and may be used for large coupled experiments.</p>
+							</div>
+
+							<div class="col-md-6">
+								<h4 class="">Related Links</h4>
+								<p class="mb-0">Reference: <a href="https://esmci.github.io/cime/versions/master/html/users_guide/machine.html">CIME Defining the machine Documentation</a></p>
+					            <p class="mb-0"><a href="https://docs.google.com/spreadsheets/d/15QUqsXD1Z0K_rYNTlykBvjTRt8s0XcQw0cfAj9DZbj0/edit#gid=0">CESM2 machine/compiler/test status spreadsheet</a></p>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- table buttons -->
+					<div class="text-center" style="">
+						<button type="button" class="btn btn-primary" id="btn-show-all-children">
+							<i class="fa fa-folder-open"></i> Show All
+						</button>
+
+						<button type="button" class="btn btn-primary" id="btn-hide-all-children">
+							<i class="fa fa-folder"></i> Hide All
+						</button>
+					</div>
+
+
+					<table id="machTable" class="table table-striped bg-white">
+				      <thead>
+					<tr>
+					  <th>Name</th>
+					  <th>OS</th>
+					  <th>Compilers</th>
+					  <th>pes/node</th>
+					  <th>max_tasks/node</th>
+					  <th>Support Level</th>
+					  <th class="none">Details</th>
+					</tr>
+				      </thead>
+				      <tbody>
+					{% for name in mach_list|sort %}
+					<tr>
+					  <td>{{ name }}</td>
+					  <td>{{ mach_dict[(name,"os")] }}</td>
+					  <td>{{ mach_dict[(name,"compilers")] }}</td>
+					  <td>{{ mach_dict[(name,"max_tasks_per_node")] }}</td>
+					  <td>{{ mach_dict[(name,"max_mpitasks_per_node")] }}</td>
+					  <td>{{ mach_dict[(name,"support")] }}</td>
+					  <td><pre id="details">{{ mach_dict[(name,"description")] }}</pre></td>
+					</tr>
+					{% endfor %}
+			              </tbody>
+			              <tfoot>
+					<tr>
+					  <th>Name</th>
+					  <th>OS</th>
+					  <th>Compilers</th>
+					  <th>pes/node</th>
+					  <th>max_tasks/node</th>
+					  <th>Support Level</th>
+					  <th class="none">Details</th>
+					</tr>
+				      </tfoot>
+				    </table>
+				</div>
+			</article>
 		</div>
+	</main>
 
-		<div class="post-heading">
-		  <h2>Machine Definitions</h2>
-		</div>
-	      </div>
-	    </div>
-	  </div>
+    <!-- footer & javascript includes -->
+    <!--#include virtual="/styles/unity/includes/footer/footer.html" -->
+    <!--#include virtual="/styles/unity/js/js-include.html" -->
 
-	  <div class="row small">
-	    <div class="col-lg-6">
-	      <p><a href="http://esmci.github.io/cime/users_guide/machine.html">CIME Defining the machine Documentation </a></p>
-	      <p><a href="https://docs.google.com/spreadsheets/d/15QUqsXD1Z0K_rYNTlykBvjTRt8s0XcQw0cfAj9DZbj0/edit#gid=0">CESM2 machine/compiler/test status spreadsheet</a></p>
-	    </div>
+    <!-- datatables js -->
+	<script src="/styles/unity/js/datatables.min.js"></script>
+	<script>
+		$(document).ready( function () {
+			var table = $('#machTable').DataTable( {
+				"responsive": true,
+				"lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+				"columnDefs": [
+				{ "orderData": 5, "targets": 0 },
+				]
+			} );
 
-	    <div class="col-lg-6 text-right">
-	      <p>Model Version: <span class="label label-default">{{ model_version }}</span></p>
-	      <p>HTML created on: <span class="label label-info">{{ today }}</span></p>
-	    </div>
-	  </div>
+			// Handle click on "Expand All" button
+			$('#btn-show-all-children').on('click', function(){
+				// Expand row details
+				table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
+			});
 
-	  <div class="row">
-	    <div class="post-border-bottom">
-	      <h4 class="clear-marginbot">Support Levels:</h4>
-	      <p>A support level of <strong>Scientific</strong> indicates that the machine has passed statistical validation and CESM regression testing and may be used for large coupled experiments.</p> 
-
-	      <p>A support level of <strong>Tested</strong> indicates that the machine has passed funtional CESM regression testing but may not necessarily by appropriate for large coupled experiments due to machine restrictions; for example, limited number of nodes and disk space.</p>
-	    </div>
-
-            <!-- table buttons start -->
-            <div class="btns-show-hide" style="">
-	      <button type="button" class="btn btn-default btn-sm" id="btn-show-all-children">
-		<i class="fa fa-folder-open"></i> Show All
-	      </button>
-	      
-	      <button type="button" class="btn btn-default btn-sm" id="btn-hide-all-children">
-		<i class="fa fa-folder-open"></i> Hide All
-	      </button>
-	    </div>
-	    <!-- table buttons end -->
-
-            <table id="machTable" class="table table-condensed table-striped">
-	      <thead>
-		<tr>
-		  <th>Name</th>
-		  <th>OS</th>
-		  <th>Compilers</th>
-		  <th>pes/node</th>
-		  <th>max_tasks/node</th>
-		  <th>Support Level</th>
-		  <th class="none">Details</th>
-		</tr>
-	      </thead>
-	      <tbody>
-		{% for name in mach_list|sort %}
-		<tr>
-		  <td>{{ name }}</td>
-		  <td>{{ mach_dict[(name,"os")] }}</td>
-		  <td>{{ mach_dict[(name,"compilers")] }}</td>
-		  <td>{{ mach_dict[(name,"max_tasks_per_node")] }}</td>
-		  <td>{{ mach_dict[(name,"max_mpitasks_per_node")] }}</td>
-		  <td>{{ mach_dict[(name,"support")] }}</td>
-		  <td><pre id="details">{{ mach_dict[(name,"description")] }}</pre></td>
-		</tr>
-		{% endfor %}
-              </tbody>
-              <tfoot>
-		<tr>
-		  <th>Name</th>
-		  <th>OS</th>
-		  <th>Compilers</th>
-		  <th>pes/node</th>
-		  <th>max_tasks/node</th>
-		  <th>Support Level</th>
-		  <th class="none">Details</th>
-		</tr>
-	      </tfoot>
-	    </table>
-	  </div>
-	</div>
-      </section>
-
-      <footer>
-          <!-- footer -->
-          <!--#include virtual="/styles/modern/includes/footer/footer-inc.html" -->
-          <!-- end footer -->
-      </footer>
-
-    </div>
-    <a href="#" class="scrollup"><i class="fa fa-angle-up active"></i></a>
-    
-    <!--#include virtual="/styles/modern/js/js-include.html" -->
-	<script type="text/javascript" src="/styles/modern/js/datatables.min.js"></script> 
-    <script>
-    $(document).ready( function () {
-	var table = $('#machTable').DataTable( {
-	    "responsive": true,
-	    "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-            "columnDefs": [
-               { "orderData": 5, "targets": 0 },
-            ]
-        } );
-
-	// Handle click on "Expand All" button
-	$('#btn-show-all-children').on('click', function(){
-	    // Expand row details
-            table.rows(':not(.parent)').nodes().to$().find('td:first-child').trigger('click');
-	});
-	
-	// Handle click on "Collapse All" button
-	$('#btn-hide-all-children').on('click', function(){
-            // Collapse row details
-            table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
-	});
-    } );
-    </script>
-
-  </body>
+			// Handle click on "Collapse All" button
+			$('#btn-hide-all-children').on('click', function(){
+				// Collapse row details
+				table.rows('.parent').nodes().to$().find('td:first-child').trigger('click');
+			});
+		});
+	</script>
+</body>
 </html>
+
+
+
