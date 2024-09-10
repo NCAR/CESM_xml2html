@@ -1,0 +1,3 @@
+CIMEROOT=/path/to/cime
+CESMROOT=/path/to/CESMX.Y.Z
+OUTROOT=/path/to/templates

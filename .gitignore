@@ -9,3 +9,6 @@ toss*
 
 # dont need mac files
 .DS_Store
+
+# dont need local paths
+paths.txt

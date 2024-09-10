@@ -1,0 +1,16 @@
+NEED TO RUN FOR
+- cesm2.2.2
+- cesm2.2.1
+- cesm2.1.5
+- cesm2.1.4 have issues with checkout externals so could try https://bb.cgd.ucar.edu/cesm/threads/github-changes-will-require-updates-to-cesm2-x-tags.9022/ or just copy 2.1.5
+
+
+# UPDATES
+comptag is now grabbed via get_git_tag "git describe --exact-match --tags" from the nmlfile directory instead of command line
+
+not sure how to get the compversion via the script 
+
+
+# GETTING CESM
+git clone -b release-cesm2.1.4 https://github.com/ESCOMP/CESM.git .
+./manage_externals/checkout_externals -o

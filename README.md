@@ -1,51 +1,49 @@
 # CESM xml2html
 
-Python tools for auto-generating HTML from CESM and CIME XML configuration files.
-The jinja2 template files use the CESM web site skins and styles. Modeling groups
-other than CESM will want to modify the templates for their specific model.
+Python tools for auto-generating HTML from CESM and CIME XML configuration files. The jinja2 template files use the CESM web site skins and styles. Modeling groups other than CESM will want to modify the templates for their specific model.
+
+
 
 ## Requirements
   
-  CIME v maint-5.6 (06/26/2018 or later)
+- CIME >= maint-5.6
+- CESM >= 2.0.beta09
+- [jinja2](https://pypi.org/project/Jinja2/)
+
+
+## Instructions
+Copy `paths.default.txt` to a new file called `paths.txt` and update the values for `CIMEROOT CESMROOT OUTROOT` to their respective paths. Then run the scripts below to generate the HTML files.
+
+### Python scripts
+The following scripts are used to generate each individual HTML file based on the parameters passed.
+
+#### namelist-html.py (previously nmldef2html.py)
+Parses a namelist XML file and generates a namelist definition HTML page. These pages will be used as the namelist definition pages on the [Component Configuration Settings page](https://docs.cesm.ucar.edu/models/cesm2/settings/current/) which are the `/models/cesm2/settings/$CESM_VERSION/*_nml.html` pages.
+
+**Note** some namelist values are not valid in XML. The `&` character needs to be manually modified to be `&amp;` in order for the schema checks to work correctly.
+
+Usage:
+> ./namelist-html.py --cesmmodel 2.1.5 --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile $OUTROOT/cam_nml.html --compversion 6.0
+
+This example will:
+- Set the CESM model version for use in the HTML otutput files
+- Set the XML CAM namelist file "namelist_definition.xml" 
+- Set the "CAM" component 
+- Set the path and filename to save the HTML file 
+- Set the compversion for the CAM component to 6.0
+
+You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
   
-  CESM >= 2.0.beta09
-  
-  jinja2 template python module available from https://pypi.python.org/pypi/Jinja2
-  
-  >pip install --user jinja2
+Help:
+> ./namelist-html.py -h
 
-  CIMEROOT environment variable pointing to local CIME root location
 
-  On CGD machines, jinja2 is available in python2.7.14
+### Shell scripts
+The following scripts are used to generate all HTML files using the python scripts with preset parameters. 
 
-  >module load lang/python/2.7.14
+#### namelist-create.sh (previously gen_all_nml)
+Uses the `namelist-html.py` script to generate all namelist definition pages using preset parameters for each component.
 
-## Python tools
-
-***************************************************
-Steps to generate namelist definitions to html
-
-Synopsis:
-  Parses a namelist XML file and generates a html page. Note: some namelist
-  values are not valid in XML. The "&" character needs to be manually modified
-  to be "&amp;" in order for the schema checks to work correctly. 
-
-Example:
-  >nmldef2html.py 
-    --nmlfile ~/cesm2_0_alpha06/cime/src/drivers/mct/cime_config/namelist_definition_drv.xml 
-    --comp Driver 
-    --htmlfile drv.html
-
-  This example reads the XML namelist file "namelist_definition_drv.xml" for the
-  "Driver" component and generates an output html file "drv.html".
-
-  You can view the file either locally using:
-  >open drv.html
-  
-  or copy the drv.html file to a web server for remote viewing.
-  
-Options:
-  >nmldef2html.py --help
 
 ***************************************************
 Steps to generate compsets html 
