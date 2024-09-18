@@ -9,10 +9,11 @@ Python tools for auto-generating HTML from CESM and CIME XML configuration files
 - CIME >= maint-5.6
 - CESM >= 2.0.beta09
 - [jinja2](https://pypi.org/project/Jinja2/)
+- git
 
 
 ## Instructions
-Copy `paths.default.txt` to a new file called `paths.txt` and update the values for `CIMEROOT CESMROOT OUTROOT` to their respective paths. Then run the scripts below to generate the HTML files.
+Copy `paths.default.txt` to a new file called `paths.txt` and update the values for `CIMEROOT CESMROOT OUTROOT` to their respective paths. Then run the scripts below to generate the HTML files. **Note** you must update the paths for each version of CESM you are running the scripts for.
 
 ### Python scripts
 The following scripts are used to generate each individual HTML file based on the parameters passed.
@@ -23,71 +24,140 @@ Parses a namelist XML file and generates a namelist definition HTML page. These 
 **Note** some namelist values are not valid in XML. The `&` character needs to be manually modified to be `&amp;` in order for the schema checks to work correctly.
 
 Usage:
-> ./namelist-html.py --cesmmodel 2.1.5 --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile $OUTROOT/cam_nml.html --compversion 6.0
+> ./namelist-html.py --cesmmodel 2.1.5 --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile cam_nml.html --compversion 6.0
 
 This example will:
 - Set the CESM model version for use in the HTML otutput files
 - Set the XML CAM namelist file "namelist_definition.xml" 
 - Set the "CAM" component 
-- Set the path and filename to save the HTML file 
-- Set the compversion for the CAM component to 6.0
+- Set the filename to save the HTML file which uses OUTROOT set in paths.txt
+- Set the compversion for the CAM component to "6.0"
 
 You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
-  
+
 Help:
 > ./namelist-html.py -h
 
 
+
+#### input-html.py (previously compinputdef2html.py)
+Parses a component config XML file and generates a component input parameter HTML page. These pages will be used as the CASEROOT Variable Definitions on the [Component Configuration Settings page](https://docs.cesm.ucar.edu/models/cesm2/settings/current/) which are the `/models/cesm2/settings/$CESM_VERSION/*_input.html` pages.
+
+Usage:
+> ./input-html.py --cesmmodel 2.1.5 --inputfile $CESMROOT/components/cam/cime_config/config_component.xml --comp CAM --htmlfile cam_input.html --compversion 6.0
+
+This example will:
+- Set the CESM model version for use in the HTML otutput files
+- Set the XML CAM config file "config_component.xml" 
+- Set the "CAM" component 
+- Set the filename to save the HTML file which uses OUTROOT set in paths.txt
+- Set the compversion for the CAM component to "6.0"
+
+You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
+
+Help:
+> ./input-html.py -h
+
+
+
+#### compset-html.py (previously compsetdef2html.py)
+Creates the Component Sets Definitions page based on CESM model version. This page will be used as the Component Sets on the [Configurations & Grids page](https://docs.cesm.ucar.edu/models/cesm2/config/) which are the `/models/cesm2/config/$CESM_VERSION/compsets.html` pages.
+
+Usage:
+> ./compset-html.py --version 2.1.5 --htmlfile compsets.html
+
+This example will:
+- Set the CESM model version for use in the HTML otutput files
+- Set the filename to save the HTML file which uses OUTROOT set in paths.txt
+
+You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
+
+This file uses a symlink so that the current version is the default shown. So after the file has been uploaded into the correct CESM version directory, will need to update the symlink:
+```
+rm /$WEBROOT/models/cesm2/config/compsets.html
+ln -s /$WEBROOT/models/cesm2/config/$CESM_VERSION/compsets.html
+```
+
+Help:
+> ./compset-html.py -h
+
+
+
+#### grids-html.py (previously griddef2html.py)
+Creates the Grid Resolution Definitions page based on CESM model version. This page will be used as the Grid Resolutions on the [Configurations & Grids page](https://docs.cesm.ucar.edu/models/cesm2/config/) which are the `/models/cesm2/config/$CESM_VERSION/grids.html` pages.
+
+Usage:
+First will need to generate the grids.txt file for use in the script:
+> cime/scripts/query_config --grids --long > grids.txt
+Then edit the grids.txt to remove all lines up to the first line containing 'alias:'
+Once done can run the python script to generate the HTML file:
+> ./grids-html.py --version 2.1.5 --htmlfile grids.html --txtfile /fully-qualified-path-to/grids.txt
+
+This example will:
+- Set the CESM model version for use in the HTML otutput files
+- Set the filename to save the HTML file which uses OUTROOT set in paths.txt
+- Set the grids.txt file generated in the first step
+
+You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
+
+This file uses a symlink so that the current version is the default shown. So after the file has been uploaded into the correct CESM version directory, will need to update the symlink:
+```
+rm /$WEBROOT/models/cesm2/config/grids.html
+ln -s /$WEBROOT/models/cesm2/config/$CESM_VERSION/grids.html
+```
+
+Help:
+> ./grids-html.py -h
+
+
+
+#### machines-html.py (previously machdef2html.py)
+Creates the Machine Definitions page based on CESM model version. This page will be used as the Supported Machines and Compilers on the [Configurations & Grids page](https://docs.cesm.ucar.edu/models/cesm2/config/) which are the `/models/cesm2/config/$CESM_VERSION/machines.html` pages.
+
+Usage:
+> ./machines-html.py --version 2.1.5 --htmlfile machines.html --supported cheyenne,hobart --tested cori,edison,stampede2,bluewaters,theta
+
+This example will:
+- Set the CESM model version for use in the HTML otutput files
+- Set the filename to save the HTML file which uses OUTROOT set in paths.txt
+- Set the list of supported machines
+- Set the list of tested machines
+
+You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
+
+This file uses a symlink so that the current version is the default shown. So after the file has been uploaded into the correct CESM version directory, will need to update the symlink:
+```
+rm /$WEBROOT/models/cesm2/config/machines.html
+ln -s /$WEBROOT/models/cesm2/config/$CESM_VERSION/machines.html
+```
+
+Help:
+> ./machines-html.py -h
+
+
+
 ### Shell scripts
-The following scripts are used to generate all HTML files using the python scripts with preset parameters. 
+The following scripts are used to generate all HTML files using the python scripts with preset parameters. You will need to edit these to match the version of CESM/Components you are generating the files for as well as the XML file paths.
+
+The model component version values can be found in the CESM Externals.cfg file.
+
+These HTML files uses a symlink so that the current version is the default shown. So after the files has been uploaded into the correct CESM version directory, will need to update the symlink:
+```
+rm /$WEBROOT/models/cesm2/settings/current
+ln -s /$WEBROOT/models/cesm2/settings/$CESM_VERSION current
+```
 
 #### namelist-create.sh (previously gen_all_nml)
 Uses the `namelist-html.py` script to generate all namelist definition pages using preset parameters for each component.
 
-
-***************************************************
-Steps to generate compsets html 
-
-   >compsetdef2html.py --htmlfile compsets.html --version CESM2.Y.Z
-
-Update the /cesmweb/html/models/cesm2/config/2.Y.Z/rows-include-comp.html
-files to include the new version in the pulldown option menu
-
-rm /cesmweb/html/models/cesm2/config/compsets.html
-ln -s /cesmweb/html/models/cesm2/config/2.Y.Z/compsets.html
-
-***************************************************
-Steps to generate the grids html
-
-1. run cime/scripts/query_config --grids --long > grids.txt
-2. edit the grids.txt to remove all lines up to the first line containing 'alias:'
-2. run griddef2html.py --txtfile /fully-qualified-path-to/grids.txt --htmlfile /fully-qualified-path-to/grids.html --version CESM2.Y.Z
-
-update all the /cesmweb/html/models/cesm2/config/2.Y.Z/grids.html files with new version in pulldown option menu
-rm /cesmweb/html/models/cesm2/config/grids.html
-ln -s /cesmweb/html/models/cesm2/config/2.Y.Z/grids.html
-
-***************************************************
-Steps to generate the machines html
-
-   >machdef2html.py --htmlfile /fully-qualified-path-to/machines.html --version CESM2.Y.Z --supported cheyenne,hobart --tested cori,edison,stampede2,bluewaters,theta
-
-update all the /cesmweb/html/models/cesm2/config/2.Y.Z/machines.html files with new version in pulldown option menu
-rm /cesmweb/html/models/cesm2/config/machines.html
-ln -s /cesmweb/html/models/cesm2/config/2.Y.Z/machines.html
-
-***************************************************
+#### input-create.sh (previously gen_all_input)
+Uses the `input-html.py` script to generate all component input pages using preset parameters for each component.
 
 
-There are 2 scripts in this repo to generate all namelist definition files and all CASEROOT variable files for all components
 
-   >gen_all_nml
-   >gen_all_input
+### Include files
+With each new version of CESM HTML files created, you will need to update the include files which control the dropdowns for switching between model versions.
 
-Check the variables CESMROOT and OUTPUT at the top of the files to be sure the directory paths are correct. Also, update the
-model component version values to match those in the CESM Externals.cfg file.
 
-Update the /cesmweb/html/models/settings/2.Y.Z/index.html files to include a new dropdown option in the verion menu
-rm /cesmweb/html/models/settings/current
-ln -s /cesmweb/html/models/settings/2.Y.Z current
+
 

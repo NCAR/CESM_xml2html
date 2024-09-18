@@ -532,10 +532,6 @@ def _main_(options, dir_current):
                 category_group = category
             html_dict[category_group] = group_list
 
-    # load up jinja template
-    templateLoader = jinja2.FileSystemLoader( searchpath='{0}/templates'.format(dir_current) )
-    templateEnv = jinja2.Environment( loader=templateLoader )
-
 
     # ERROR WITH CICE causing issues on {% for category, var_list in html_dict|dictsort %} in template file
     #for row in html_dict:
@@ -543,6 +539,10 @@ def _main_(options, dir_current):
     #return 0
     # Fix for CICE to remove none entires
     html_dict = {k: v for k, v in html_dict.items() if k is not None}
+
+    # load up jinja template
+    templateLoader = jinja2.FileSystemLoader( searchpath='{0}/templates'.format(dir_current) )
+    templateEnv = jinja2.Environment( loader=templateLoader )
 
     # populate the template variables
     tmplFile = 'namelist.tmpl'
