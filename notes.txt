@@ -21,3 +21,7 @@ https://bb.cgd.ucar.edu/cesm/threads/github-changes-will-require-updates-to-cesm
 https://bb.cgd.ucar.edu/cesm/threads/git-instead-of-svn-manage_externals-checkout_externals.9801/
 https://bb.cgd.ucar.edu/cesm/threads/unable-to-connect-to-a-repository-at-url-https-github-com-cfmip-cospv2-0-tags-v2-1-4cesm-src.9290/
 https://bb.cgd.ucar.edu/cesm/threads/errors-in-porting-cesm2-2.6056/
+
+
+# Problems with namelists
+POP and MARBL had to manually modify the XML

@@ -81,7 +81,7 @@ from CIME.XML.generic_xml import GenericXML
 
 # global variables
 _now = datetime.datetime.now().strftime('%Y-%m-%d')
-_comps = ['AQUAP','CAM','CLM','CISM','POP2','MARBL','CICE','RTM','MOSART','WW3','Driver','DATM','DESP','DICE','DLND','DOCN','DROF','DWAV']
+_comps = ['AQUAP','CAM','CLM','CISM','POP2','POP','MARBL','CICE','RTM','MOSART','WW3','Driver','DATM','DESP','DICE','DLND','DOCN','DROF','DWAV']
 _cime_comps = ['Driver','DATM','DESP','DICE','DLND','DOCN','DROF','DWAV']
 _exclude_defaults_comps = ['POP2']
 _exclude_groups = {
@@ -90,6 +90,7 @@ _exclude_groups = {
     'CLM':    [],
     'CISM':   [],
     'POP2':   [],
+    'POP':   [],
     'MARBL':  [],
     'CICE':   [],
     'RTM' :   [],
@@ -195,8 +196,16 @@ def _main_(options, dir_current):
     if not options.JSON:
         try:
             definition = GenericXML(infile=filename)
-        except:
-            sys.exit("Error: unable to parse file %s" %filename)
+        #except:
+            #sys.exit("Error: unable to parse file %s" %filename)
+        except Exception as e:
+            # Log the exception message
+            print(f"Error: unable to parse file {filename}")
+            print(f"Exception type: {type(e).__name__}")
+            print(f"Exception message: {e}")
+            # Optionally, print the full traceback
+            #traceback.print_exc()
+            sys.exit(1)
 
         # Determine if have new or old schema
         default_files = glob.glob(os.path.join(basepath,"namelist_defaults*.xml"))
@@ -205,6 +214,18 @@ def _main_(options, dir_current):
             schema = "old"
             if comp not in _exclude_defaults_comps:
                 for default_file in default_files:
+                    try:
+                        default = GenericXML(infile=default_file)
+                    except Exception as e:
+                        # Log the exception message
+                        print(f"Error: unable to parse file {default_file}")
+                        print(f"Exception type: {type(e).__name__}")
+                        print(f"Exception message: {e}")
+                        # Optionally, print the full traceback
+                        #traceback.print_exc()
+                        sys.exit(1)
+
+                    # if all good then continue
                     default = GenericXML(infile=default_file)
                     default.read(infile=default_file, schema=schema)
                     defaults.append(default)
@@ -324,9 +345,10 @@ def _main_(options, dir_current):
                                                 derived_default_value[marbl_varname].append(MARBL_json_var["default_value"])
                                     else:
                                         sys.exit("Error: unknown derived type root '%s'" % root_varname)
-                                    derived_entry_type[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"].encode('utf-8')
+                                    derived_entry_type[marbl_varname] = MARBL_json_dict[real_category][root_varname]["datatype"][component]["datatype"]
                                     if "_array_shape" in MARBL_json_dict[real_category][root_varname]["datatype"][component].keys():
-                                        derived_entry_type[marbl_varname] = derived_entry_type[marbl_varname] + b"(%d)" % \
+                                        #print(derived_entry_type[marbl_varname])
+                                        derived_entry_type[marbl_varname] = derived_entry_type[marbl_varname] + "(%d)" % \
                                                 MARBL_get_array_len(MARBL_json_dict[real_category][root_varname]["datatype"][component]["_array_shape"],
                                                                     MARBL_default_settings)
                                     derived_category[marbl_varname] = real_category
@@ -413,10 +435,10 @@ def _main_(options, dir_current):
                         entry_type = "%s%%%s" % (derived_entry_root[node], derived_entry_type[node])
                     else:
                         if MARBL_json_dict[category][node]['subcategory'] == group_name:
-                            entry_type = MARBL_json_dict[category][node]['datatype'].encode('utf-8')
+                            entry_type = MARBL_json_dict[category][node]['datatype']
                             # Is this an array?
                             if "_array_shape" in MARBL_json_dict[category][node].keys():
-                                entry_type = entry_type + b"(%d)" % \
+                                entry_type = entry_type + "(%d)" % \
                                         MARBL_get_array_len(MARBL_json_dict[category][node]["_array_shape"],
                                                             MARBL_default_settings)
                 
@@ -440,7 +462,7 @@ def _main_(options, dir_current):
                     else:
                         if MARBL_json_dict[category][node]["subcategory"] == group_name:
                             if "valid_values" in MARBL_json_dict[category][node].keys():
-                                valid_values = ",".join(MARBL_json_dict[category][node]["valid_values"]).encode('utf-8')
+                                valid_values = ",".join(MARBL_json_dict[category][node]["valid_values"])
                             else:
                                 valid_values = None
 
@@ -449,9 +471,12 @@ def _main_(options, dir_current):
                 else:
                     if not valid_values:
                         if category == "MARBL_derived_types":
-                            valid_values = b"any " + derived_entry_type[node]
+                            valid_values = "any " + derived_entry_type[node]
                         else:
+                            #print(entry_type)
                             valid_values = "any " + entry_type
+
+                        #print(valid_values)
                         if "char" in valid_values:
                             valid_values = "any char"
 
@@ -497,11 +522,11 @@ def _main_(options, dir_current):
                             values = []
                             for value in default_values:
                                 if type(value) == type (u''):
-                                    values.append(value.encode('utf-8'))
+                                    values.append(value)
                                 else:
                                     values.append(value)
                         elif type(default_values) == type (u''):
-                            values = default_values.encode('utf-8')
+                            values = default_values
 
                 # exclude getting CAM and POP default value - it is included in the description text
                 elif comp not in _exclude_defaults_comps:
