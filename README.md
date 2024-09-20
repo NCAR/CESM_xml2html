@@ -24,7 +24,7 @@ Parses a namelist XML file and generates a namelist definition HTML page. These 
 **Note** some namelist values are not valid in XML. The `&` character needs to be manually modified to be `&amp;` in order for the schema checks to work correctly.
 
 Usage:
-> ./namelist-html.py --cesmmodel 2.1.5 --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile cam_nml.html --compversion 6.0
+> python namelist-html.py --cesmmodel 2.1.5 --nmlfile $CESMROOT/components/cam/bld/namelist_files/namelist_definition.xml --comp CAM --htmlfile cam_nml.html --compversion 6.0
 
 This example will:
 - Set the CESM model version for use in the HTML otutput files
@@ -36,7 +36,7 @@ This example will:
 You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
 
 Help:
-> ./namelist-html.py -h
+> python namelist-html.py -h
 
 
 
@@ -44,7 +44,7 @@ Help:
 Parses a component config XML file and generates a component input parameter HTML page. These pages will be used as the CASEROOT Variable Definitions on the [Component Configuration Settings page](https://docs.cesm.ucar.edu/models/cesm2/settings/current/) which are the `/models/cesm2/settings/$CESM_VERSION/*_input.html` pages.
 
 Usage:
-> ./input-html.py --cesmmodel 2.1.5 --inputfile $CESMROOT/components/cam/cime_config/config_component.xml --comp CAM --htmlfile cam_input.html --compversion 6.0
+> python input-html.py --cesmmodel 2.1.5 --inputfile $CESMROOT/components/cam/cime_config/config_component.xml --comp CAM --htmlfile cam_input.html --compversion 6.0
 
 This example will:
 - Set the CESM model version for use in the HTML otutput files
@@ -56,7 +56,7 @@ This example will:
 You can view the file either locally or copy the HTML file to a web server for remote viewing with correct styles and theme.
 
 Help:
-> ./input-html.py -h
+> python input-html.py -h
 
 
 
@@ -64,7 +64,7 @@ Help:
 Creates the Component Sets Definitions page based on CESM model version. This page will be used as the Component Sets on the [Configurations & Grids page](https://docs.cesm.ucar.edu/models/cesm2/config/) which are the `/models/cesm2/config/$CESM_VERSION/compsets.html` pages.
 
 Usage:
-> ./compset-html.py --version 2.1.5 --htmlfile compsets.html
+> python compset-html.py --version 2.1.5 --htmlfile compsets.html
 
 This example will:
 - Set the CESM model version for use in the HTML otutput files
@@ -79,7 +79,7 @@ ln -s /$WEBROOT/models/cesm2/config/$CESM_VERSION/compsets.html
 ```
 
 Help:
-> ./compset-html.py -h
+> python compset-html.py -h
 
 
 
@@ -88,11 +88,11 @@ Creates the Grid Resolution Definitions page based on CESM model version. This p
 
 Usage:
 First will need to generate the grids.txt file for use in the script:
-> cime/scripts/query_config --grids --long > grids.txt
+> $CESMROOT/cime/scripts/query_config --grids --long > grids.txt
 
 Then edit the grids.txt to remove all lines up to the first line containing 'alias:'
 Once done can run the python script to generate the HTML file:
-> ./grids-html.py --version 2.1.5 --htmlfile grids.html --txtfile /fully-qualified-path-to/grids.txt
+> python grids-html.py --version 2.1.5 --htmlfile grids.html --txtfile /fully-qualified-path-to/grids.txt
 
 This example will:
 - Set the CESM model version for use in the HTML otutput files
@@ -108,7 +108,7 @@ ln -s /$WEBROOT/models/cesm2/config/$CESM_VERSION/grids.html
 ```
 
 Help:
-> ./grids-html.py -h
+> python grids-html.py -h
 
 
 
@@ -116,7 +116,7 @@ Help:
 Creates the Machine Definitions page based on CESM model version. This page will be used as the Supported Machines and Compilers on the [Configurations & Grids page](https://docs.cesm.ucar.edu/models/cesm2/config/) which are the `/models/cesm2/config/$CESM_VERSION/machines.html` pages.
 
 Usage:
-> ./machines-html.py --version 2.1.5 --htmlfile machines.html --supported cheyenne,hobart --tested cori,edison,stampede2,bluewaters,theta
+> python machines-html.py --version 2.1.5 --htmlfile machines.html --supported cheyenne,hobart --tested cori,edison,stampede2,bluewaters,theta
 
 This example will:
 - Set the CESM model version for use in the HTML otutput files
@@ -133,7 +133,7 @@ ln -s /$WEBROOT/models/cesm2/config/$CESM_VERSION/machines.html
 ```
 
 Help:
-> ./machines-html.py -h
+> python machines-html.py -h
 
 
 
