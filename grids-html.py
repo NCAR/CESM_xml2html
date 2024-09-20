@@ -104,8 +104,7 @@ def _main_func(options, work_dir):
 
     # read in txtfile with the grids definitions
     txtfile = options.txtfile[0]
-    expect((txtfile),
-           'Cannot find query_config --grids --long output text file %s' %txtfile)
+    expect((txtfile),'Cannot find query_config --grids --long output text file %s' %txtfile)
 
     # read the grids file looking for aliases and load the all_grids dict
     with open( txtfile, 'r') as f:
@@ -135,11 +134,14 @@ def _main_func(options, work_dir):
     # render the template
     grid_tmpl = template.render( templateVars )
 
+    # set the full path of the HTML file
+    html_filepath = os.path.join(OUTROOT, options.htmlfile[0])
+
     # write the output file
-    with open( options.htmlfile[0], 'w') as html:
+    with open( html_filepath, 'w') as html:
         html.write(grid_tmpl)
 
-    return 0
+    return "HTML file created at " + html_filepath
 
 ###############################################################################
 

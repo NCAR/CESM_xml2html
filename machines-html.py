@@ -141,11 +141,14 @@ def _main_func(options, work_dir):
     # render the template
     mach_tmpl = template.render( templateVars )
 
+    # set the full path of the HTML file
+    html_filepath = os.path.join(OUTROOT, options.htmlfile[0])
+
     # write the output file
-    with open( options.htmlfile[0], 'w') as html:
+    with open( html_filepath, 'w') as html:
         html.write(mach_tmpl)
 
-    return 0
+    return "HTML file created at " + html_filepath
 
 ###############################################################################
 

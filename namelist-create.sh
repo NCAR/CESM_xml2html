@@ -39,7 +39,6 @@ else
     exit 1
 fi
 
-# CESMROOT - /Users/ryanj/Desktop/web/cesm/escomp/CESM2.1.5
 
 
 # CAM

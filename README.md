@@ -89,6 +89,7 @@ Creates the Grid Resolution Definitions page based on CESM model version. This p
 Usage:
 First will need to generate the grids.txt file for use in the script:
 > cime/scripts/query_config --grids --long > grids.txt
+
 Then edit the grids.txt to remove all lines up to the first line containing 'alias:'
 Once done can run the python script to generate the HTML file:
 > ./grids-html.py --version 2.1.5 --htmlfile grids.html --txtfile /fully-qualified-path-to/grids.txt
