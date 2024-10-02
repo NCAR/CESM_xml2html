@@ -1,9 +1,12 @@
 NEED TO RUN FOR
 - cesm2.2.2
-- cesm2.2.1
-- cesm2.1.5
-- cesm2.1.4 have issues with checkout externals so could try https://bb.cgd.ucar.edu/cesm/threads/github-changes-will-require-updates-to-cesm2-x-tags.9022/ or just copy 2.1.5
+- cesm2.2.1 - NO MARBL as cant find $MARBLROOT/MARBL_tools/yaml_to_json.py script - CANT get checkout_externals to fire
 
+
+- cesm2.1.5 DONE
+- cesm2.1.4 COPIED FROM 2.1.5 - have issues with checkout externals so could try https://bb.cgd.ucar.edu/cesm/threads/github-changes-will-require-updates-to-cesm2-x-tags.9022/ or just copy 2.1.5
+
+LOTS of manual XML updates for POP, some for CAM
 
 # UPDATES
 comptag is now grabbed via get_git_tag "git describe --exact-match --tags" from the nmlfile directory instead of command line
@@ -25,3 +28,11 @@ https://bb.cgd.ucar.edu/cesm/threads/errors-in-porting-cesm2-2.6056/
 
 # Problems with namelists
 POP and MARBL had to manually modify the XML
+
+
+git clone -b release-cesm2.2.1 https://github.com/ESCOMP/CESM.git
+
+
+python compset-html.py --version 2.1.4 --htmlfile compsets.html
+python grids-html.py --version 2.1.4 --htmlfile grids.html --txtfile /Users/ryanj/Desktop/web/cesm/escomp/CESM2.1.5/grids.txt 
+python machines-html.py --version 2.1.4 --htmlfile machines.html --supported cheyenne,hobart --tested cori,edison,stampede2,bluewaters,theta
